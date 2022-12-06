@@ -1,0 +1,16 @@
+h2 {
+    background-color: lightblue;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.expanded {
+    background-color: lightgreen;
+
+}
+
+/*
+div {
+    font-family: monospace;
+}
+*/
