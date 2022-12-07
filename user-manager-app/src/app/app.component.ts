@@ -42,6 +42,9 @@ import { UserService } from './user.service';
       </tbody>
 
     </table>
+
+    <user [user]="selectedUser" (userChange)="onUserChange($event)"></user>
+
     <hr>
     {{ selectedUser | json }}
   `,
@@ -50,7 +53,7 @@ import { UserService } from './user.service';
 export class AppComponent {
   title = 'user manager app';
 
-  selectedUser: User | undefined;
+  selectedUser: User | undefined = new User();
 
   users:User[];
 
@@ -61,6 +64,18 @@ export class AppComponent {
     // this.userService = new UserService();
   }
 
+  onUserChange(changedUser: User) {
+
+    if (changedUser.id == -1) {
+      // this is an add
+      this.selectedUser = this.userService.addUser(changedUser);
+
+    } else {
+      // this is an update
+      this.userService.updateUser(changedUser);
+      this.selectedUser = changedUser;
+    }
+  }
   onTestUpdate() {
     //this.selectedUser!.name = "CHANGED";
 
@@ -69,11 +84,16 @@ export class AppComponent {
 
   }
   onAddUser() {
-    let newUser = new User(-1, "NEW USER", "new.user@gmail.com");
-    this.userService.addUser(newUser);
+    this.selectedUser = new User();
+
+    //this.userService.addUser(newUser);
   }
   onClickRow(id: number) {
+
+    console.log(`you clicked on item ${id}`);
+
     this.selectedUser = this.userService.getUser(id);
+    console.log(this.selectedUser);
   }
   onDelete(id: number) {
     if (confirm("Are you sure?")) {

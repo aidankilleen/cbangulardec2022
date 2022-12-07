@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../models/user.model';
 
-
 @Component({
   selector: 'user',
   template: `
@@ -13,16 +12,16 @@ import { User } from '../models/user.model';
     <h2>Viewing</h2>
       <table *ngIf="!editing">
         <tr>
-          <td>Id:</td><td>{{ user.id }}</td>
+          <td>Id:</td><td>{{ user!.id }}</td>
         </tr>
         <tr>
-          <td>Name:</td><td>{{ user.name }}</td>
+          <td>Name:</td><td>{{ user!.name }}</td>
         </tr>
         <tr>
-          <td>Email:</td><td>{{ user.email }}</td>
+          <td>Email:</td><td>{{ user!.email }}</td>
         </tr>
         <tr>
-          <td>Active:</td><td>{{ user.active ? "Active" : "Inactive" }}</td>
+          <td>Active:</td><td>{{ user!.active ? "Active" : "Inactive" }}</td>
         </tr>
       </table>
     </div>
@@ -44,7 +43,7 @@ import { User } from '../models/user.model';
 
 }) 
 export class UserComponent {
-  @Input() user: User = new User(-1, "", "", false);
+  @Input() user: User | undefined = new User(-1, "", "", false);
   @Output() userChange = new EventEmitter();
 
   editingUser: User = new User(-1, "", "", false);
@@ -70,10 +69,10 @@ export class UserComponent {
     // just be a reference to this.user
 
     // clone this.user instead
-    this.editingUser = new User(this.user.id, 
-                                this.user.name, 
-                                this.user.email, 
-                                this.user.active);
+    this.editingUser = new User(this.user!.id, 
+                                this.user!.name, 
+                                this.user!.email, 
+                                this.user!.active);
     this.editing = true;
   }
   onCancel() {
