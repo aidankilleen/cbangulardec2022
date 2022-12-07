@@ -1,0 +1,7 @@
+table tbody tr:hover {
+    background-color: lightgreen;
+}
+
+.selected-row {
+    background-color: lightblue;
+}
