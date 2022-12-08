@@ -22,6 +22,43 @@ export class UserHttpService {
 
   getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.url);
+  }
 
+  getUser(id: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.url}/${id}`);
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
+
+  addUser(userToAdd: User): Observable<User> {
+
+    let u = {
+      name: userToAdd.name, 
+      email: userToAdd.email, 
+      active: userToAdd.active
+    };
+
+    return this.httpClient.post<User>(
+      this.url, 
+      u, 
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+  updateUser(userToUpdate: User): Observable<User> {
+    return this.httpClient.put<User> (
+      `${this.url}/${userToUpdate.id}`, 
+      userToUpdate, 
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
   }
 }

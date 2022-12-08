@@ -1,5 +1,12 @@
-{
-  "users": [
+import { Injectable } from '@angular/core';
+import { User } from './models/user.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+  users:User[] = [
     {
       "id": 1,
       "name": "Zoe",
@@ -30,5 +37,10 @@
       "email": "vera@gmail.com",
       "active": true
     }
-  ]
+  ];
+  constructor() { }
+
+  getUsers(): User[] {
+    return this.users;
+  }
 }

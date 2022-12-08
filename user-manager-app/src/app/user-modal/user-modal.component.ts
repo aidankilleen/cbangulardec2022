@@ -22,8 +22,8 @@ import { User } from '../models/user.model';
       <label>Active</label>
       <input type="checkbox" [(ngModel)]="editingUser!.active"><br>
 
-      <button (click)="onOkClick()">Ok</button>
-      <button (click)="onCancelClick()">Cancel</button>
+      <button class="btn btn-primary" (click)="onOkClick()">Ok</button>
+      <button class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
     </div>
   </div>
   `,
