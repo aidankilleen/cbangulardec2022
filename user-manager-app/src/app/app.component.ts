@@ -11,10 +11,6 @@ import { UserService } from './user.service';
       Add User
     </button>
 
-    <button (click)="onTestUpdate()">
-      Test Update
-    </button>
-
     <table>
       <thead>
         <tr>
@@ -37,16 +33,24 @@ import { UserService } from './user.service';
             <button (click)="onDelete(user.id)">
               Delete
             </button>
+            <button (click)="onEdit(user)">
+              Edit
+            </button>
           </td>
         </tr>
       </tbody>
 
     </table>
 
-    <user [user]="selectedUser" (userChange)="onUserChange($event)"></user>
+    <user-modal 
+      [display]="showDialog"
+      [user]="selectedUser"
+      (closed)="onDialogClosed($event)"
+      (cancel)="onDialogCancel()">
+    </user-modal>
 
     <hr>
-    {{ selectedUser | json }}
+    
   `,
   styleUrls: ['./app.component.css']
 })
@@ -54,6 +58,7 @@ export class AppComponent {
   title = 'user manager app';
 
   selectedUser: User | undefined = new User();
+  showDialog: boolean = false;
 
   users:User[];
 
@@ -63,29 +68,28 @@ export class AppComponent {
     // taditional (non-enterprise sw dev)
     // this.userService = new UserService();
   }
-
-  onUserChange(changedUser: User) {
-
-    if (changedUser.id == -1) {
-      // this is an add
-      this.selectedUser = this.userService.addUser(changedUser);
-
+  onDialogClosed(user: User) {
+    if (user.id == -1) {
+      // new user
+      this.userService.addUser(user);
     } else {
-      // this is an update
-      this.userService.updateUser(changedUser);
-      this.selectedUser = changedUser;
+      // existing user
+      this.userService.updateUser(user);
     }
-  }
-  onTestUpdate() {
-    //this.selectedUser!.name = "CHANGED";
 
-    let userToChange = new User(3, "CHANGED", "changed@gmail.com", true);
-    this.userService.updateUser(userToChange);
-
+    this.showDialog = false;
   }
+  onDialogCancel() {
+    this.showDialog = false;
+  }
+  onEdit(user:User) {
+    this.selectedUser = user;
+    this.showDialog = true;
+  }
+
   onAddUser() {
     this.selectedUser = new User();
-
+    this.showDialog = true;
     //this.userService.addUser(newUser);
   }
   onClickRow(id: number) {
