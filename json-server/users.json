@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 2,
+      "name": "Yvonne",
+      "email": "yvonne@gmail.com",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Xavier",
+      "email": "xavier@gmail.com",
+      "active": false
+    },
+    {
+      "id": 4,
+      "name": "Wendy",
+      "email": "wendy@gmail.com",
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "Vera",
+      "email": "vera@gmail.com",
+      "active": false
+    },
+    {
+      "name": "New User From Thunder",
+      "email": "wendy@gmail.com",
+      "active": true,
+      "id": 6
+    }
+  ]
+}

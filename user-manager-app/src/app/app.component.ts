@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './models/user.model';
+import { UserHttpService } from './user-http.service';
 import { UserService } from './user.service';
 
 @Component({
@@ -50,6 +51,11 @@ import { UserService } from './user.service';
     </user-modal>
 
     <hr>
+    <button (click)="onClickTestHttp()">
+      Test Http Call
+    </button>
+    <hr>
+    {{ users | json }}
     
   `,
   styleUrls: ['./app.component.css']
@@ -62,12 +68,21 @@ export class AppComponent {
 
   users:User[];
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, 
+              private userHttpService: UserHttpService) {
 
     this.users = this.userService.getUsers();
     // taditional (non-enterprise sw dev)
     // this.userService = new UserService();
   }
+
+  onClickTestHttp() {
+    this.userHttpService.getUsers()
+      .subscribe((data: User[])=> {
+        this.users = data;
+      })
+  }
+
   onDialogClosed(user: User) {
     if (user.id == -1) {
       // new user
