@@ -6,8 +6,7 @@ import { UserService } from '../user.service';
   selector: 'app-user-list-page',
   template: `
     <h2>User List</h2>
-
-    <table>
+    <table class="table">
       <thead>
         <tr>
           <th>Id</th>
@@ -18,15 +17,13 @@ import { UserService } from '../user.service';
       </thead>
       <tbody>
         <tr *ngFor="let user of users">
-          <td>{{ user.id }}</td>
+          <td><a routerLink="{{ user.id }}">{{ user.id }}</a></td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.active }}</td>
-
         </tr>
       </tbody>
     </table>
-  
   `,
   styleUrls: ['./user-list-page.component.css']
 })

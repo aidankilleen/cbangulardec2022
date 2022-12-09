@@ -2,9 +2,9 @@
   "users": [
     {
       "id": 1,
-      "name": "Zoe",
+      "name": "Zoey",
       "email": "alice@gmail.com",
-      "active": false
+      "active": true
     },
     {
       "id": 2,
@@ -26,9 +26,15 @@
     },
     {
       "id": 5,
-      "name": "Vera",
+      "name": "Veronica",
       "email": "vera@gmail.com",
       "active": true
+    },
+    {
+      "name": "Fred",
+      "email": "fred@gmail.com",
+      "active": true,
+      "id": 6
     }
   ]
 }

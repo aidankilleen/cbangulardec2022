@@ -43,4 +43,10 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
+
+  getUser(id: number): User | undefined {
+
+    let u = this.users.find(user => user.id == id);
+    return u;
+  }
 }
